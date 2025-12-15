@@ -55,37 +55,44 @@ void TriangleMesh::rewriteAllVBOs() {
     //TODO: Fill VBO buffers with data (Ex. 2)
     if (VBOv == 0 || VBOn == 0 || VBOf == 0) return; // Safety check
 
-    // --- 1. Vertex Tamponu (VBOv) ---
+    // --- 1. Vertex Buffer (VBOv) ---
+    // Bind the buffer to the GL_ARRAY_BUFFER target
     f->glBindBuffer(GL_ARRAY_BUFFER, VBOv);
+    // Copy the vertex data to the buffer bound to GL_ARRAY_BUFFER
     f->glBufferData(
-        GL_ARRAY_BUFFER,                       // Hedef (Vertex Veri Tamponu)
-        vertices.size() * sizeof(Vertex),      // Verinin bayt cinsinden boyutu
-        (const GLvoid*)vertices.data(),        // Verinin pointerı (açıkça GLvoid* tipine dönüştürülmüş)
-        GL_STATIC_DRAW                         // Kullanım ipucu (Veri bir kez ayarlanır, çok kullanılır)
+        GL_ARRAY_BUFFER,                       // Target (Vertex Data Buffer)
+        vertices.size() * sizeof(Vertex),      // Size of the data in bytes
+        (const GLvoid*)vertices.data(),        // Pointer to the data (explicitly cast to GLvoid*)
+        GL_STATIC_DRAW                         // Usage hint: Data is set once, used many times
     );
 
-    // --- 2. Normal Tamponu (VBOn) ---
+    // --- 2. Normal Buffer (VBOn) ---
+    // Bind the buffer to the GL_ARRAY_BUFFER target
     f->glBindBuffer(GL_ARRAY_BUFFER, VBOn);
+    // Copy the normal data to the buffer
     f->glBufferData(
         GL_ARRAY_BUFFER,
         normals.size() * sizeof(Vertex),
-        (const GLvoid*)normals.data(),         // Verinin pointerı (açıkça GLvoid* tipine dönüştürülmüş)
+        (const GLvoid*)normals.data(),         // Pointer to the data (explicitly cast to GLvoid*)
         GL_STATIC_DRAW
     );
 
-    // --- 3. Yüz/Index Tamponu (VBOf) ---
-    // Index verisinin boyutu: (üçgen sayısı) * (üçgende 3 index) * (bir indexin boyutu: unsigned int)
+    // --- 3. Face/Index Buffer (VBOf) ---
+    // Calculate the size of the index data in bytes: 
+    // (number of faces) * (3 indices per face) * (size of one index: unsigned int)
     size_t index_data_size = triangles.size() * 3 * sizeof(unsigned int);
 
-    f->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VBOf); // Hedef (Index/Eleman Veri Tamponu)
+    // Bind the buffer to the GL_ELEMENT_ARRAY_BUFFER target (for indices)
+    f->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VBOf);
+    // Copy the index data to the buffer
     f->glBufferData(
         GL_ELEMENT_ARRAY_BUFFER,
         index_data_size,
-        (const GLvoid*)triangles.data(),       // Verinin pointerı (açıkça GLvoid* tipine dönüştürülmüş)
+        (const GLvoid*)triangles.data(),       // Pointer to the data (explicitly cast to GLvoid*)
         GL_STATIC_DRAW
     );
 
-    // Tamponları serbest bırakın
+    // Unbind the buffers to prevent accidental modification
     f->glBindBuffer(GL_ARRAY_BUFFER, 0);
     f->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
