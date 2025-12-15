@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_uebung_02_FILE /Users/bedo/Downloads/Framework_OpenGL_VBO_Shader_Qt6_Legacy_Window/build/uebung_02)
+set(__QT_DEPLOY_TARGET_uebung_02_TYPE EXECUTABLE)
