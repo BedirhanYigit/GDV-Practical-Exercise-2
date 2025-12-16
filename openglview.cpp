@@ -27,6 +27,87 @@ OpenGLView::OpenGLView(QWidget* parent) : QOpenGLWidget(parent) {
     fpsCounterTimer.start();
 }
 
+void OpenGLView::runPerformanceTest(int numCopies) {
+    // Number of meshes to render for a measurable difference. 
+    // Use numCopies as the gridSize, so total meshes = numCopies * numCopies
+    int testGridSize = numCopies; 
+    
+    // Use an array to store test times for clarity
+    long long times[3]; 
+
+    // Define the rendering modes for the loop
+    const std::vector<RenderMode> modes = {RenderMode::IMMEDIATE, RenderMode::ARRAY, RenderMode::VBO};
+    
+    qDebug() << "--- Starting Performance Test ---";
+    qDebug() << "Test Grid Size (N*N):" << testGridSize << "x" << testGridSize;
+    
+    // Loop through all three rendering modes
+    for (int modeIndex = 0; modeIndex < modes.size(); ++modeIndex) {
+        
+        QElapsedTimer timer;
+        timer.start();
+        
+        // Ensure the correct OpenGL context is active for drawing
+        makeCurrent();
+
+        // Simulate the paintGL loop structure for timing
+        // The glLoadIdentity, rotation, and light setup are omitted as they are constant overhead.
+        
+        f->glEnable(GL_LIGHTING);
+        
+        // --- Core Rendering Loop for Timing ---
+        for (int i = -testGridSize; i <= testGridSize; ++i) {
+            for (int j = -testGridSize; j <= testGridSize; ++j) {
+                
+                // Simplified color and transformation setup from paintGL
+                if (i != 0 || j != 0) {
+                    float r = (float) i / (2.0f * testGridSize) + 0.5f;
+                    float g = (float) j / (2.0f * testGridSize) + 0.5f;
+                    float b = 1.0f - 0.5f * r - 0.5f * g;
+                    f->glColor3f(r, g, b);
+                } else f->glColor3f(1, 1, 1);
+                
+                f->glPushMatrix();
+                f->glTranslatef(4.0f * i, 0.0f, 4.0f * j);
+
+                // Call the correct drawing function based on modeIndex
+                switch (modes[modeIndex]) {
+                    case RenderMode::ARRAY:
+                        triMesh.drawArray();
+                        break;
+                    case RenderMode::VBO:
+                        triMesh.drawVBO();
+                        break;
+                    default: // IMMEDIATE Mode
+                        triMesh.drawImmediate();
+                        break;
+                }
+                f->glPopMatrix();
+            }
+        }
+        
+        // CRITICAL: Force the GPU to finish all drawing commands before stopping the timer.
+        f->glFinish();
+        
+        // Stop the timer and save the elapsed time
+        times[modeIndex] = timer.elapsed();
+
+        doneCurrent();
+    }
+    
+    qDebug() << "--- Performance Results (" << testGridSize * testGridSize << " Meshes) ---";
+    qDebug() << "Immediate Mode (CPU-Bound): " << times[0] << " ms";
+    qDebug() << "Array Mode (RAM-Bound):    " << times[1] << " ms";
+    qDebug() << "VBO Mode (GPU-Bound):      " << times[2] << " ms";
+    qDebug() << "------------------------------------------------";
+    
+    // Re-trigger a paint event to clear any partial rendering left by the test
+    update();
+}
+
+
+
+
 void OpenGLView::setGridSize(int gridSize)
 {
     this->gridSize = gridSize;

@@ -38,6 +38,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    connect(ui->performanceTestButton, &QPushButton::clicked, [this]() {
+        // Run the test using the square of the current gridSizeSpinBox value
+        // The runPerformanceTest function handles the loop, we pass the N value
+        ui->openGLWidget->runPerformanceTest(ui->gridSizeSpinBox->value());
+    });
     connect(ui->exitButton, &QPushButton::clicked, qApp, &QApplication::exit);
     connect(ui->gridSizeSpinBox, &QSpinBox::valueChanged, ui->openGLWidget, &OpenGLView::setGridSize);
     connect(ui->lightMovementCheckBox, &QCheckBox::clicked, ui->openGLWidget, &OpenGLView::triggerLightMovement);

@@ -60,7 +60,9 @@ static constexpr auto qt_meta_stringdata_ZN10OpenGLViewE = QtMocHelpers::stringD
     "changeRenderMode",
     "compileShader",
     "vertexShaderPath",
-    "fragmentShaderPath"
+    "fragmentShaderPath",
+    "runPerformanceTest",
+    "numCopies"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -72,7 +74,7 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10OpenGLViewE[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   14, // methods
+      14,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -80,21 +82,22 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10OpenGLViewE[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   92,    2, 0x06,    1 /* Public */,
-       4,    1,   95,    2, 0x06,    3 /* Public */,
-       6,    1,   98,    2, 0x06,    5 /* Public */,
+       1,    1,   98,    2, 0x06,    1 /* Public */,
+       4,    1,  101,    2, 0x06,    3 /* Public */,
+       6,    1,  104,    2, 0x06,    5 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       8,    1,  101,    2, 0x0a,    7 /* Public */,
-      10,    0,  104,    2, 0x0a,    9 /* Public */,
-      11,    0,  105,    2, 0x0a,   10 /* Public */,
-      12,    1,  106,    2, 0x0a,   11 /* Public */,
-      12,    0,  109,    2, 0x2a,   13 /* Public | MethodCloned */,
-      14,    3,  110,    2, 0x0a,   14 /* Public */,
-      18,    2,  117,    2, 0x0a,   18 /* Public */,
-      19,    1,  122,    2, 0x0a,   21 /* Public */,
-      20,    1,  125,    2, 0x0a,   23 /* Public */,
-      21,    2,  128,    2, 0x0a,   25 /* Public */,
+       8,    1,  107,    2, 0x0a,    7 /* Public */,
+      10,    0,  110,    2, 0x0a,    9 /* Public */,
+      11,    0,  111,    2, 0x0a,   10 /* Public */,
+      12,    1,  112,    2, 0x0a,   11 /* Public */,
+      12,    0,  115,    2, 0x2a,   13 /* Public | MethodCloned */,
+      14,    3,  116,    2, 0x0a,   14 /* Public */,
+      18,    2,  123,    2, 0x0a,   18 /* Public */,
+      19,    1,  128,    2, 0x0a,   21 /* Public */,
+      20,    1,  131,    2, 0x0a,   23 /* Public */,
+      21,    2,  134,    2, 0x0a,   25 /* Public */,
+      24,    1,  139,    2, 0x0a,   28 /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -112,6 +115,7 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10OpenGLViewE[] = {
     QMetaType::Void, QMetaType::UInt,    7,
     QMetaType::Void, QMetaType::UInt,    7,
     QMetaType::Void, QMetaType::QString, QMetaType::QString,   22,   23,
+    QMetaType::Void, QMetaType::Int,   25,
 
        0        // eod
 };
@@ -164,7 +168,10 @@ Q_CONSTINIT const QMetaObject OpenGLView::staticMetaObject = { {
         // method 'compileShader'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
-        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        // method 'runPerformanceTest'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>
     >,
     nullptr
 } };
@@ -187,6 +194,7 @@ void OpenGLView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 10: _t->changeShader((*reinterpret_cast< std::add_pointer_t<uint>>(_a[1]))); break;
         case 11: _t->changeRenderMode((*reinterpret_cast< std::add_pointer_t<uint>>(_a[1]))); break;
         case 12: _t->compileShader((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 13: _t->runPerformanceTest((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         default: ;
         }
     }
@@ -235,14 +243,14 @@ int OpenGLView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 13)
+        if (_id < 14)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 14;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 13)
+        if (_id < 14)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 13;
+        _id -= 14;
     }
     return _id;
 }

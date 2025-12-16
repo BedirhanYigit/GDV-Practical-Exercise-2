@@ -63,7 +63,7 @@ void TriangleMesh::rewriteAllVBOs() {
         GL_ARRAY_BUFFER,                       // Target (Vertex Data Buffer)
         vertices.size() * sizeof(Vertex),      // Size of the data in bytes
         (const GLvoid*)vertices.data(),        // Pointer to the data (explicitly cast to GLvoid*)
-        GL_STATIC_DRAW                         // Usage hint: Data is set once, used many times
+        GL_STATIC_DRAW                         
     );
 
     // --- 2. Normal Buffer (VBOn) ---
@@ -73,7 +73,7 @@ void TriangleMesh::rewriteAllVBOs() {
     f->glBufferData(
         GL_ARRAY_BUFFER,
         normals.size() * sizeof(Vertex),
-        (const GLvoid*)normals.data(),         // Pointer to the data (explicitly cast to GLvoid*)
+        (const GLvoid*)normals.data(),        
         GL_STATIC_DRAW
     );
 

@@ -43,6 +43,7 @@ public:
     QCheckBox *lightMovementCheckBox;
     QLabel *gridSizeLabel;
     QSpinBox *gridSizeSpinBox;
+    QPushButton *performanceTestButton;
     QLabel *movementExplanationLabel;
     QSpacerItem *verticalSpacer;
     QPushButton *exitButton;
@@ -131,6 +132,11 @@ public:
 
         verticalLayout->addWidget(gridSizeSpinBox);
 
+        performanceTestButton = new QPushButton(verticalWidget);
+        performanceTestButton->setObjectName("performanceTestButton");
+
+        verticalLayout->addWidget(performanceTestButton);
+
         movementExplanationLabel = new QLabel(verticalWidget);
         movementExplanationLabel->setObjectName("movementExplanationLabel");
 
@@ -179,6 +185,7 @@ public:
 
         lightMovementCheckBox->setText(QCoreApplication::translate("MainWindow", "Lichtbewegung", nullptr));
         gridSizeLabel->setText(QCoreApplication::translate("MainWindow", "Gittergr\303\266\303\237e", nullptr));
+        performanceTestButton->setText(QCoreApplication::translate("MainWindow", "Run Performance Test", nullptr));
         movementExplanationLabel->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><h4>Bewegungssteuerung:</h4><p><h5>linke Maustaste:</h5><br/>Rotation um Achsen</p><p><h5>rechte Maustaste:</h5><br/>Zoom/Vorw\303\244rts-R\303\274ckw\303\244rts</p><p><h5>mittlere Maustaste:</h5><br/>hoch/runter/links/rechts</p></body></html>", nullptr));
         exitButton->setText(QCoreApplication::translate("MainWindow", "Beenden", nullptr));
     } // retranslateUi

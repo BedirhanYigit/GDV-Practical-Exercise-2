@@ -39,7 +39,8 @@ public slots:
     void changeShader(unsigned int index);
     void changeRenderMode(unsigned int index);
     void compileShader(const QString& vertexShaderPath, const QString& fragmentShaderPath);
-
+    // Function to run the performance comparison, task 3. 
+    void runPerformanceTest(int numCopies);
 protected:
     void initializeGL() override;
     void resizeGL(int w, int h) override;

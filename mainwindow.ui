@@ -141,6 +141,13 @@
         </widget>
        </item>
        <item>
+       <widget class="QPushButton" name="performanceTestButton">
+         <property name="text">
+          <string>Run Performance Test</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="movementExplanationLabel">
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;h4&gt;Bewegungssteuerung:&lt;/h4&gt;&lt;p&gt;&lt;h5&gt;linke Maustaste:&lt;/h5&gt;&lt;br/&gt;Rotation um Achsen&lt;/p&gt;&lt;p&gt;&lt;h5&gt;rechte Maustaste:&lt;/h5&gt;&lt;br/&gt;Zoom/Vorwärts-Rückwärts&lt;/p&gt;&lt;p&gt;&lt;h5&gt;mittlere Maustaste:&lt;/h5&gt;&lt;br/&gt;hoch/runter/links/rechts&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
